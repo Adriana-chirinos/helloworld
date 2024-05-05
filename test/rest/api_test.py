@@ -27,13 +27,23 @@ class TestApi(unittest.TestCase):
         
      def test_api_multiply(self):
         url = f"{BASE_URL}/calc/multiply/5/2"
-        response = urlopen(url, timeout=300)
+        response = urlopen(url, timeout=DEFAULT_TIMEOUT)
         self.assertEqual(
             response.status, http.client.OK, f"Error en la petición API a {url}"
         )
         self.assertEqual(
             response.read().decode(), "10", "ERROR MULTI"
         )
-        
+         
+     def test_api_divide(self):
+        url = f"{BASE_URL}/calc/divide/2/2"
+        response = urlopen(url, timeout=DEFAULT_TIMEOUT)
+        self.assertEqual(
+            response.status, http.client.OK, f"Error en la petición API a {url}"
+        )
+        self.assertEqual(
+            response.read().decode(), "1", "ERROR DIVIDE"
+        )
+         
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()
