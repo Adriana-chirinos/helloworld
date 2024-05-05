@@ -1,0 +1,58 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Get Code') {
+            steps {
+                // Obtener código del repositorio
+                git branch: 'feature_fix_racecond', url: 'https://github.com/Adriana-chirinos/helloworld.git'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                echo 'Eyy, esto es Python. No hay que compilar nada!!!'
+                echo WORKSPACE
+                bat 'dir'
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    parallel (
+                        Unit: {
+                            lock(resource: 'result.xml') {
+                                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                                    bat '''
+                                        SET PYTHONPATH=%WORKSPACE%
+                                        pytest --junitxml=result.xml test/unit
+                                    '''
+                                }
+                            }
+                        },
+                        Rest: {
+                            lock(resource: 'result.xml') {
+                                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                                    bat '''
+                                        set FLASK_APP=app\\api.py
+                                        start flask run
+                                        start java -jar C:\\Unir\\ejercicios\\wiremock\\wiremock-standalone-3.5.4.jar --port 9090 --root-dir test\\wiremock
+                                    
+                                        set PYTHONPATH=%WORKSPACE%
+                                        pytest --junitxml=result.xml test/rest
+                                    '''
+                                }
+                            }
+                        }
+                    )
+                }
+            }
+        }
+        stage('Results') {
+            steps {
+                junit 'result*.xml'
+                echo 'FINISH!!'
+            }
+        }
+    }
+}
