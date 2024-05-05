@@ -25,7 +25,7 @@ class TestApi(unittest.TestCase):
             response.read().decode(), "3", "ERROR ADD"
         )
         
-     def test_api_multiply(self):
+    def test_api_multiply(self):
         url = f"{BASE_URL}/calc/multiply/5/2"
         response = urlopen(url, timeout=DEFAULT_TIMEOUT)
         self.assertEqual(
@@ -35,7 +35,7 @@ class TestApi(unittest.TestCase):
             response.read().decode(), "10", "ERROR MULTI"
         )
          
-     def test_api_divide(self):
+    def test_api_divide(self):
         url = f"{BASE_URL}/calc/divide/2/2"
         response = urlopen(url, timeout=DEFAULT_TIMEOUT)
         self.assertEqual(
