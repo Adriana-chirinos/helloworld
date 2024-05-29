@@ -1,6 +1,3 @@
-
-
-
 class InvalidPermissions(Exception):
     pass
 
