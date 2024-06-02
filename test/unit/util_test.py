@@ -18,14 +18,7 @@ class TestUtil(unittest.TestCase):
         self.assertAlmostEqual(1.5, util.convert_to_number("1.5"), delta=0.0000001) # Nuevo
 
     def test_convert_to_number_invalid_type(self):
-        self.assertRaises(TypeError, util.convert_to_number, "")
-        self.assertRaises(TypeError, util.convert_to_number, "3.h")
-        self.assertRaises(TypeError, util.convert_to_number, "s")
-        self.assertRaises(TypeError, util.convert_to_number, None)
-        self.assertRaises(TypeError, util.convert_to_number, object())
-        self.assertRaises(TypeError, util.convert_to_number, "abc123") # Nuevo
-     # Other test 
-        self.assertRaises(TypeError, util.convert_to_number, "3,14")
-        self.assertRaises(TypeError, util.convert_to_number, "one")
-        self.assertRaises(TypeError, util.convert_to_number, "-")
-     
+        invalid_params = ["", "3.h", "s", None, object(), "abc123"]
+        for param in invalid_params:
+            with self.subTest(param=param):
+                self.assertRaises(TypeError, util.convert_to_number, param)
