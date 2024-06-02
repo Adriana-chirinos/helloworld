@@ -89,5 +89,5 @@ class TestCalculate(unittest.TestCase):
         self.assertEqual(0, self.calc.substract(0, 0))
         self.assertRaises(TypeError, self.calc.substract, "0", 0)
 
-if __name__ == "__main__":  
+if __name__ == "__feature_fix_coverage__":  
     unittest.main()
