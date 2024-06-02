@@ -1,5 +1,5 @@
-import unittest
 import pytest
+import unittest
 
 from app.calc import Calculator
 
@@ -22,14 +22,14 @@ class TestCalculate(unittest.TestCase):
         self.assertRaises(TypeError, self.calc.divide, "2", 2)
         
     def test_add_method_fails_with_nan_parameter(self):
-        invalid_params = ["2", None, object(), "abc123"]  # other test
+        invalid_params = ["2", None, object(), "abc123"]
         for param in invalid_params:
             with self.subTest(param=param):
                 self.assertRaises(TypeError, self.calc.add, param, 2)
                 self.assertRaises(TypeError, self.calc.add, 2, param)
 
     def test_divide_method_fails_by_zero(self):
-        zero_divisors = [0, -0]  # Additional zero divisors
+        zero_divisors = [0, -0]
         for divisor in zero_divisors:
             with self.subTest(divisor=divisor):
                 self.assertRaises(TypeError, self.calc.divide, 4, divisor)
@@ -40,7 +40,7 @@ class TestCalculate(unittest.TestCase):
         self.assertEqual(0, self.calc.multiply(-1, 0))
         self.assertEqual(-2, self.calc.multiply(-1, 2))
         self.assertRaises(TypeError, self.calc.multiply, "0", 0)
-        self.assertRaises(TypeError, self.calc.multiply, 0, "0")  # New
+        self.assertRaises(TypeError, self.calc.multiply, 0, "0")
 
     def test_power_method_returns_correct_result(self):
         self.assertEqual(4, self.calc.power(2, 2))
@@ -48,7 +48,7 @@ class TestCalculate(unittest.TestCase):
         self.assertEqual(1, self.calc.power(-1, 0))
         self.assertEqual(-27, self.calc.power(-3, 3))
         self.assertRaises(TypeError, self.calc.power, "0", 0)
-        self.assertEqual(0.001, self.calc.power(10, -3))  # new
+        self.assertEqual(0.001, self.calc.power(10, -3))
 
     def test_substract_method_returns_correct_result(self):
         self.assertEqual(4, self.calc.substract(10, 6))
