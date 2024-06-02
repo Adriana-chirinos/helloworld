@@ -24,6 +24,10 @@ class TestUtil(unittest.TestCase):
         self.assertRaises(TypeError, util.convert_to_number, None)
         self.assertRaises(TypeError, util.convert_to_number, object())
         self.assertRaises(TypeError, util.convert_to_number, "abc123") # Nuevo
-
+     # Other test 
+        self.assertRaises(TypeError, util.convert_to_number, "3,14")
+        self.assertRaises(TypeError, util.convert_to_number, "one")
+        self.assertRaises(TypeError, util.convert_to_number, "-")
+     
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()
