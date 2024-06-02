@@ -22,6 +22,3 @@ class TestUtil(unittest.TestCase):
         for param in invalid_params:
             with self.subTest(param=param):
                 self.assertRaises(TypeError, util.convert_to_number, param)
-
-if __name__ == "__main__":  
-    unittest.main()
